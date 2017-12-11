@@ -5,5 +5,4 @@
 			<class name="org.test.BasicTest"/>
 		</classes>
 	</test>
-
 </suite>
