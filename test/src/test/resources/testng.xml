@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestSuite">
+<suite name="TestSuite" thread-count="10">
 		<test name="Testing First Program">
 		<classes>
 			<class name="org.test.BasicTest"/>
