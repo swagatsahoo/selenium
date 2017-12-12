@@ -15,12 +15,11 @@ public class Config {
 
 	@BeforeTest
 	public static void Initialization() {
-		System.out.println("Initializing the Browser to start");
+		System.out.println("Initializing the Browser for testing");
 		System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("https://www.google.co.in");
-		driver.manage().window().maximize();
-		
+		driver.manage().window().maximize();	
 	}
 	
 	@Test

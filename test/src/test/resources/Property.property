@@ -1,0 +1,2 @@
+ChromeDriverPath = src\\test\\resources\\chromedriver.exe
+URL = https://www.google.co.in
