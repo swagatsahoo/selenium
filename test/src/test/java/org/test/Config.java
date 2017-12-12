@@ -30,7 +30,7 @@ public class Config {
 			prop.load(fis);
 		} 
 		catch (Exception e) {
-			System.out.println("Exception is: "+e.getMessage());
+			System.out.println("Exception is: "+ e.getMessage());
 		};
 	}
 	
