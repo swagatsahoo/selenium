@@ -25,8 +25,8 @@ public class Initialization  {
 		System.out.println("Initializing the Browser for testing");
 		System.setProperty("webdriver.chrome.driver", configReader.ChromePath());
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.get(configReader.URL());
-		driver.manage().window().maximize();	
 	}
 	
 	@Test
