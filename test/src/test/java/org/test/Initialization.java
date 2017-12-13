@@ -31,11 +31,13 @@ public class Initialization  {
 	
 	@Test
 	public static void MainTest() {
+		
 		System.out.println("Main test");
 	}
 	
 	@AfterTest
 	public static void TearDown() {
+		
 		System.out.println("Finishing Test with Final Touch");
 		Reports();
 		driver.quit();
