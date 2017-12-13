@@ -1,0 +1,4 @@
+ChromeDriverPath = src\\test\\resources\\chromedriver.exe
+URL = https://www.google.co.in
+SourceReportFile = target\\surefire-reports\\emailable-report.html
+DestinationReportFile = C:\\Reports

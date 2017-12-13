@@ -14,7 +14,7 @@ public class ConfigReader {
 		
 		try {
 			
-			File src = new File("./src/test/resources/Property.property");
+			File src = new File("./src/test/resources/Config.property");
 			FileInputStream fis = new FileInputStream(src);
 			prop = new Properties();
 			prop.load(fis);	
@@ -28,17 +28,28 @@ public class ConfigReader {
 		}
 	}
 	
-	public String ChromePath() {
+	public String chromePath() {
 		
 		String path = prop.getProperty("ChromeDriverPath");
 		return path;
 		
 	}
 	
-	public String URL() {
+	public String url() {
 		
 		String URL = prop.getProperty("URL");
 		return URL;
 	}
+	
+	public String sourceReportFile() {
 		
+		String URL = prop.getProperty("SourceReportFile");
+		return URL;
+	}
+	
+	public String destinationReportFile() {
+		
+		String URL = prop.getProperty("DestinationReportFile");
+		return URL;
+	}
 }
