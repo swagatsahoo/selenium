@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestSuite" thread-count="10">
-		<test name="Testing First Program">
+		<test name="Testing">
 		<classes>
 			<class name="org.test.Initialization"/>
 		</classes>

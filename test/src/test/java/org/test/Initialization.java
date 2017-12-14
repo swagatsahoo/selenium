@@ -1,31 +1,47 @@
 package org.test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class Initialization  {
 	
 
 	//Initializing the global variable
 	
-	static ConfigReader configReader = new ConfigReader();
-	public static WebDriver driver;
+	static Date date = new Date();
+	static DateFormat df = new SimpleDateFormat("dd.MMM.YYY, EEE 'at' h.mm.ss a z");
+	//static DateFormat df = new SimpleDateFormat("YYYY MMM dd_HHhrs mmmin SSsec");
 	
-	/*------------------------------------------------------------------------------------------------*/
+	
+	static ConfigReader configReader = new ConfigReader();
+	static WebDriver driver;
+	static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(configReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html");
+	static ExtentReports report = new ExtentReports();
+	public static ExtentTest stepLogger;
+	
+	
+	
+	/*----------------------------------------------------------------------------------------------
 	
 	//Saving Reports to a specified location
 	public static void generatedReportsWithTimeStamp() {
-		
+	
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("YYYYMMMdd_HHmmSS");
 		
@@ -39,9 +55,11 @@ public class Initialization  {
 			e.printStackTrace();
 		}
 	}
-	
+	--*/
 
-	/*------------------------------------------------------------------------------------------------*/
+	/*------------------------------------------
+	 * 
+	 * ------------------------------------------------------*/
 			
 	//Starting of Before Test
 	@BeforeTest
@@ -52,6 +70,12 @@ public class Initialization  {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(configReader.url());
+		htmlReporter.loadXMLConfig("src/test/resources/extentReportConfig.xml");
+		report.attachReporter(htmlReporter);
+		report.setSystemInfo("Environment", "RUBIK SIT");
+		report.setSystemInfo("Date and Time of Execution", df.format(date));
+		report.setSystemInfo("Author", System.getProperty("user.name"));
+		
 	}
 	
 
@@ -62,24 +86,61 @@ public class Initialization  {
 	@Test
 	public static void mainTest() {
 		
+		//stepLogger = report.createTest("TC1", "Verify the Title");
+		stepLogger.log(Status.INFO, "Trying to verify the Title");
+		
 		System.out.println("Main test");
+		Assert.assertTrue(driver.getTitle().contains("Google"));
+		stepLogger.pass("Title Verification Passed");
+		
 	}
 	
 
 	/*------------------------------------------------------------------------------------------------*/
+	@Test(dependsOnMethods = "mainTest")
+	public static void secondTest() {
+		
+		System.out.println("Starting second method");
+		//stepLogger = report.createTest("TC2", "Getting Current URL");
+		stepLogger.log(Status.INFO, "Getting Current URL");
+		
+	}
 	
+	
+	/*------------------------------------------------------------------------------------------------*/
 	
 	//After Test
-	@AfterTest
-	public static void tearDown() {
+	@AfterMethod
+	public static void tearDown(ITestResult result) {
 		
-		System.out.println("Finishing Test with Final Touch");
-		generatedReportsWithTimeStamp();
+		if(result.getStatus()==ITestResult.SUCCESS) {
+			stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed");
+		}
 		
+		else if(result.getStatus()==ITestResult.FAILURE) {
+			stepLogger.log(Status.FAIL, "The Test case " + result.getName() + " has Failed");
+			stepLogger.log(Status.FAIL, "Test Failure: "+ result.getThrowable());
+		}
+		
+		else if(result.getStatus()==ITestResult.SKIP) {
+			stepLogger.log(Status.SKIP, "The Test case " + result.getName() + " has been Skipped");
+		}
+		
+		stepLogger.log(Status.INFO, "Closing the Test Run");
+		report.flush();
 		driver.quit();
-		
 		System.out.println("Script executed and Browser Closed");
+		
+		
 	}
+	
+	
+	@BeforeMethod
+	public void register(Method method) {
+		String testName = method.getName();
+		stepLogger=report.createTest(testName);
+	}
+	
 
 }
  
