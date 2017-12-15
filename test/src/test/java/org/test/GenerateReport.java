@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class GenerateReport {
 	
-	static ConfigReader configReader = new ConfigReader();
+	static ConfigPropertyReader configPropertyReader = new ConfigPropertyReader();
 
 	
 	public static void generatedReportsWithTimeStamp() {
@@ -17,8 +17,8 @@ public class GenerateReport {
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("YYYYMMMdd_HHmmSS");
 		
-		File sourceFile = new File(configReader.sourceReportFile());
-		File destinationFile = new File( configReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html" );
+		File sourceFile = new File(configPropertyReader.sourceReportFile());
+		File destinationFile = new File( configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html" );
 		
 		try {
 			Files.copy(sourceFile.toPath(), destinationFile.toPath());

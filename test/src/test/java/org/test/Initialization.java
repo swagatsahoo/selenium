@@ -26,12 +26,12 @@ public class Initialization  {
 	
 	static Date date = new Date();
 	static DateFormat df = new SimpleDateFormat("dd.MMM.YYY, EEE 'at' h.mm.ss a z");
-	//static DateFormat df = new SimpleDateFormat("YYYY MMM dd_HHhrs mmmin SSsec");
+
 	
 	
-	static ConfigReader configReader = new ConfigReader();
+	static ConfigPropertyReader configPropertyReader = new ConfigPropertyReader();
 	static WebDriver driver;
-	static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(configReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html");
+	static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html");
 	static ExtentReports report = new ExtentReports();
 	public static ExtentTest stepLogger;
 	
@@ -45,8 +45,8 @@ public class Initialization  {
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("YYYYMMMdd_HHmmSS");
 		
-		File sourceFile = new File(configReader.sourceReportFile());
-		File destinationFile = new File( configReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html" );
+		File sourceFile = new File(configPropertyReader.sourceReportFile());
+		File destinationFile = new File( configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html" );
 		
 		try {
 			Files.copy(sourceFile.toPath(), destinationFile.toPath());
@@ -66,10 +66,10 @@ public class Initialization  {
 	public static void setUp() {
 		
 		System.out.println("Initializing the Browser for testing");
-		System.setProperty("webdriver.chrome.driver", configReader.chromePath());
+		System.setProperty("webdriver.chrome.driver", configPropertyReader.chromePath());
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get(configReader.url());
+		driver.get(configPropertyReader.url());
 		htmlReporter.loadXMLConfig("src/test/resources/extentReportConfig.xml");
 		report.attachReporter(htmlReporter);
 		report.setSystemInfo("Environment", "RUBIK SIT");
@@ -119,7 +119,7 @@ public class Initialization  {
 		
 		else if(result.getStatus()==ITestResult.FAILURE) {
 			stepLogger.log(Status.FAIL, "The Test case " + result.getName() + " has Failed");
-			stepLogger.log(Status.FAIL, "Test Failure: "+ result.getThrowable());
+			stepLogger.log(Status.FAIL, "Error Message: "+ result.getThrowable());
 		}
 		
 		else if(result.getStatus()==ITestResult.SKIP) {

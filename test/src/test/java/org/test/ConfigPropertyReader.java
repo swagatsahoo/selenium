@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class ConfigReader {
+public class ConfigPropertyReader {
 	
 	
 	Properties prop;
 
 	//Creating a method to read property file
-	public ConfigReader() {
+	public ConfigPropertyReader() {
 		
 		try {
 			
