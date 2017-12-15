@@ -5,8 +5,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.naming.AuthenticationException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -20,9 +18,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.model.Author;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class Initialization  {
@@ -79,9 +75,10 @@ public class Initialization  {
 		htmlReporter.loadXMLConfig("src/test/resources/extentReportConfig.xml");
 		report.attachReporter(htmlReporter);
 		report.setSystemInfo("Environment", "RUBIK SIT");
-		report.setSystemInfo("Date and Time of Execution", df.format(date));
+		report.setSystemInfo("Execution Date", df.format(date));
 		report.setSystemInfo("Author", System.getProperty("user.name"));
-		
+		report.setSystemInfo("OS", System.getProperty("os.name"));
+		report.setSystemInfo("Java Version", System.getProperty("java.version"));
 	}
 	
 
