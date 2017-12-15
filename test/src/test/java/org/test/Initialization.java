@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.naming.AuthenticationException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -17,6 +19,10 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.model.Author;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class Initialization  {
@@ -114,16 +120,23 @@ public class Initialization  {
 	public static void tearDown(ITestResult result) {
 		
 		if(result.getStatus()==ITestResult.SUCCESS) {
-			stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed");
+			//stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed");
+			stepLogger.pass(MarkupHelper.createLabel(result.getName() + " has Passed", ExtentColor.GREEN));
 		}
 		
 		else if(result.getStatus()==ITestResult.FAILURE) {
-			stepLogger.log(Status.FAIL, "The Test case " + result.getName() + " has Failed");
-			stepLogger.log(Status.FAIL, "Error Message: "+ result.getThrowable());
+			stepLogger.fail(MarkupHelper.createLabel(result.getName() + " has Failed with below error message", ExtentColor.RED));
+			stepLogger.fail(MarkupHelper.createCodeBlock("Error Message: " + result.getThrowable()));
+			//stepLogger.log(Status.FAIL, "The Test case " + result.getName() + " has Failed");
+			//stepLogger.log(Status.FAIL, "Error Message: "+ result.getThrowable());
+			
+			//stepLogger.assignAuthor("Swagat");
+			
 		}
 		
 		else if(result.getStatus()==ITestResult.SKIP) {
-			stepLogger.log(Status.SKIP, "The Test case " + result.getName() + " has been Skipped");
+			stepLogger.skip(MarkupHelper.createLabel(result.getName() + " has been skipped", ExtentColor.YELLOW));
+			//stepLogger.log(Status.SKIP, "The Test case " + result.getName() + " has been Skipped");
 		}
 		
 		stepLogger.log(Status.INFO, "Closing the Test Run");
