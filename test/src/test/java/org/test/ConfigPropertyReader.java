@@ -7,7 +7,7 @@ import java.util.Properties;
 public class ConfigPropertyReader {
 	
 	
-	Properties prop;
+	static Properties prop;
 
 	//Creating a method to read property file
 	public ConfigPropertyReader() {
@@ -43,13 +43,56 @@ public class ConfigPropertyReader {
 	
 	public String sourceReportFile() {
 		
-		String URL = prop.getProperty("SourceReportFile");
-		return URL;
+		String sourceReportFile = prop.getProperty("SourceReportFile");
+		return sourceReportFile;
 	}
 	
 	public String destinationReportFile() {
 		
-		String URL = prop.getProperty("DestinationReportFile");
-		return URL;
+		String destinationReportFile = prop.getProperty("DestinationReportFile");
+		return destinationReportFile;
 	}
+	
+	public String screenshotDestination() {
+		
+		String screenshotDestination = prop.getProperty("screenshotDestination");
+		return screenshotDestination;
+	}
+	
+	public String hostName() {
+		
+		String hostName = prop.getProperty("hostName");
+		return hostName;
+	}
+	
+	public String hostSMTPport() {
+		
+		String hostSMTPport = prop.getProperty("hostSMTPport");
+		return hostSMTPport;
+	}
+		
+	public String emailHostUsername() {
+		
+		String emailHostUsername = prop.getProperty("emailHostUsername");
+		return emailHostUsername;
+	}
+		
+	public String emailHostPassword() {
+		
+		String emailHostPassword = prop.getProperty("emailHostPassword");
+		return emailHostPassword;
+	}
+	
+	public String emailFrom() {
+		
+		String emailFrom = prop.getProperty("emailFrom");
+		return emailFrom;
+	}
+	
+	public String emailTo() {
+		
+		String emailTo = prop.getProperty("emailTo");
+		return emailTo;
+	}
+	
 }
