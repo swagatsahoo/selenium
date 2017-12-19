@@ -11,7 +11,7 @@ public class SendEmail extends GenericConfigClass{
 		
 			System.out.println("Send Email Process started");
 		
-		  // Create the attachment
+		  // Create the Report attachment
 		  EmailAttachment reportAttachment = new EmailAttachment();
 		  reportAttachment.setPath(OutputReport);
 		  reportAttachment.setDisposition(EmailAttachment.ATTACHMENT);
