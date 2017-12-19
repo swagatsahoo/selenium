@@ -1,4 +1,4 @@
-package org.test;
+package org.test.utility;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;

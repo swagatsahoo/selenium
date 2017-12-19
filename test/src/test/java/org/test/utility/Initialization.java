@@ -1,4 +1,4 @@
-package org.test;
+package org.test.utility;
 
 import java.lang.reflect.Method;
 

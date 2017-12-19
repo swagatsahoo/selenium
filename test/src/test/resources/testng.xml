@@ -2,7 +2,7 @@
 <suite name="TestSuite" thread-count="10">
 		<test name="Testing">
 		<classes>
-			<class name="org.test.Initialization"/>
+			<class name="org.test.utility.Initialization"/>
 		</classes>
 	</test>
 </suite>
