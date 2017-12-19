@@ -37,10 +37,10 @@ public class ConfigPropertyReader {
 		
 	}
 	
-	public String url() {
+	public String appUrl() {
 		
-		String URL = prop.getProperty("URL");
-		return URL;
+		String appURL = prop.getProperty("appURL");
+		return appURL;
 	}
 	
 	public String sourceReportFile() {

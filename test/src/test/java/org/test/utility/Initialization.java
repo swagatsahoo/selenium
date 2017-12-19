@@ -1,13 +1,16 @@
 package org.test.utility;
 
+
 import java.lang.reflect.Method;
 
 import org.apache.commons.mail.EmailException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.test.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -25,11 +28,12 @@ public class Initialization extends GenericConfigClass {
 	@BeforeTest
 	public static void setUp() {
 		
+		
 		System.out.println("Initializing the Browser for testing");
 		System.setProperty("webdriver.chrome.driver", configPropertyReader.chromePath());
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		driver.get(configPropertyReader.url());
+		driver.get(configPropertyReader.appUrl());
 		htmlReporter.loadXMLConfig("src/test/resources/extentReportConfig.xml");
 		report.attachReporter(htmlReporter);
 		
@@ -40,12 +44,13 @@ public class Initialization extends GenericConfigClass {
 		report.setSystemInfo("Author", System.getProperty("user.name"));
 		report.setSystemInfo("OS", System.getProperty("os.name"));
 		report.setSystemInfo("Java Version", System.getProperty("java.version"));
+		
 	}
 	
 		
 	
 
-	/*------------------------------------------------------------------------------------------------*/
+	/*----------------------------
 	
 	
 	
@@ -56,13 +61,12 @@ public class Initialization extends GenericConfigClass {
 		stepLogger.log(Status.INFO, "Trying to verify the Title");
 		
 		System.out.println("Main test");
-		Assert.assertEquals(driver.getTitle(),"Qvantel");
+		Assert.assertTrue(driver.getTitle().contains("Welcome"));
 		stepLogger.pass("Title Verification Passed");
 		
 	}
 	
 
-	/*------------------------------------------------------------------------------------------------*/
 	@Test
 	public static void secondTest() {
 		
@@ -72,8 +76,21 @@ public class Initialization extends GenericConfigClass {
 		
 	}
 	
+	--------------------*/
 	
-	/*------------------------------------------------------------------------------------------------*/
+	
+	@Test
+	public void newDemoAUTLogin(){
+	LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
+	login_page.loginNewToursDemo("demo", "demo");
+	stepLogger.info("Login Successful");
+	Assert.assertTrue(driver.getTitle().contains("Welcome"));
+	stepLogger.pass("Title Verification passed");
+	//Initialization.tearDown(null);
+	//Initialization.finalizeTest();
+	
+}
+	
 	
 	//After Test has been run
 	@AfterMethod
@@ -122,7 +139,7 @@ public class Initialization extends GenericConfigClass {
 	}
 	
 	
-	@AfterClass
+	@AfterSuite
 	public void finalizeTest() throws EmailException {
 		SendEmail.email();
 	}

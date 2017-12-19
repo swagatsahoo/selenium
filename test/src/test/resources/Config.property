@@ -1,5 +1,5 @@
 ChromeDriverPath = src\\test\\resources\\chromedriver.exe
-URL = https://www.google.co.in
+appURL = http://newtours.demoaut.com/mercurywelcome.php
 SourceReportFile = target\\surefire-reports\\emailable-report.html
 DestinationReportFile = C:\\Reports
 screenshotDestination = C:\\Screenshots
