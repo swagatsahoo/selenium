@@ -35,9 +35,9 @@ public class SendEmail extends GenericConfigClass{
 		  email.setFrom(configPropertyReader.emailFrom(), "Test Report Server");
 		  email.setSubject("Test Report triggered on : " + df.format(date));
 		  email.setMsg("Test Report \n\n\n\n\n\n\n |Test Report Admin|"
-		  									+ "\n\n ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+		  									+ "\n\n ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 		  									+ "\n |Disclaimer|: Do not reply to this email address directly. Your mails might not be entertained \n"
-		  										 + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		  										 + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		  
 		  email.addTo(configPropertyReader.emailTo(), "Swagat Sahoo");
 
