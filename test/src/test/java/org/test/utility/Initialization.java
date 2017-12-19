@@ -93,7 +93,7 @@ public class Initialization extends GenericConfigClass {
 			TakeScreenshot.captureScreenshot();
 			//stepLogger.fail("Snapshot added: " + stepLogger.addScreenCaptureFromPath(TakeScreenshot.captureScreenshot())); | Adding screenshot to the html report
 			//stepLogger.fail("Snapshot added. Click <a href='http://github.com'>HERE</a> to view the snapshot" ); | Adding url to html reposrt
-			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder<b>*Help:</b> Search for screenshot using name as Screenshot_" + df.format(date));
+			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder<b>@Help:</b> Search for screenshot using name as Screenshot_" + df.format(date));
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
 			
 		}
