@@ -28,6 +28,8 @@ public class ConfigPropertyReader {
 		}
 	}
 	
+	//Creating individual parameter methods to be used across packages
+	
 	public String chromePath() {
 		
 		String path = prop.getProperty("ChromeDriverPath");

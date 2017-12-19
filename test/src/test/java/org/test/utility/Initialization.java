@@ -19,39 +19,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 public class Initialization extends GenericConfigClass {
 	
 	//Initializing the global variable
-		
-	//static ConfigPropertyReader configPropertyReader = new ConfigPropertyReader();
-	//static WebDriver driver;
-	//static String OutputReport = configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html";
-	//static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(OutputReport);
-	//static ExtentReports report = new ExtentReports();
-	//public static ExtentTest stepLogger;
 	
-	
-	
-	/*----------------------------------------------------------------------------------------------
-	
-	//Saving Reports to a specified location
-	public static void generatedReportsWithTimeStamp() {
-	
-		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("YYYYMMMdd_HHmmSS");
-		
-		File sourceFile = new File(configPropertyReader.sourceReportFile());
-		File destinationFile = new File( configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html" );
-		
-		try {
-			Files.copy(sourceFile.toPath(), destinationFile.toPath());
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	--*/
-
-	/*------------------------------------------
-	 * 
-	 * ------------------------------------------------------*/
 			
 	//Starting of Before Test
 	@BeforeTest
@@ -80,11 +48,11 @@ public class Initialization extends GenericConfigClass {
 	/*------------------------------------------------------------------------------------------------*/
 	
 	
-	//Main test
+	
 	@Test
 	public static void mainTest() {
 		
-		//stepLogger = report.createTest("TC1", "Verify the Title");
+		//stepLogger = report.createTest("TC1", "Verify the Title"); | Creating individual test Cases name, but now we use the getName() to get the method names for testCases
 		stepLogger.log(Status.INFO, "Trying to verify the Title");
 		
 		System.out.println("Main test");
@@ -107,42 +75,35 @@ public class Initialization extends GenericConfigClass {
 	
 	/*------------------------------------------------------------------------------------------------*/
 	
-	//After Test
+	//After Test has been run
 	@AfterMethod
 	public void tearDown(ITestResult result) throws Throwable {
 		
 		if(result.getStatus()==ITestResult.SUCCESS) {
-			//stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed");
+			//stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed"); | Another way to add using log
 			stepLogger.pass(MarkupHelper.createLabel(result.getName() + " has Passed", ExtentColor.GREEN));
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
-			//SendEmail.email();
-			//stepLogger.info("Email Sent");
+		
 		}
 		
 		else if(result.getStatus()==ITestResult.FAILURE) {
+			
 			stepLogger.fail(MarkupHelper.createLabel(result.getName() + " has Failed with below error message", ExtentColor.RED));
 			stepLogger.fail(MarkupHelper.createCodeBlock("Error Message: " + result.getThrowable()));
-			stepLogger.fail("Snapshot added: " + stepLogger.addScreenCaptureFromPath(TakeScreenshot.captureScreenshot()));
-			stepLogger.fail("Snapshot added. Click <a href='http://github.com'>HERE</a> to view the snapshot" );
-			
+			TakeScreenshot.captureScreenshot();
+			//stepLogger.fail("Snapshot added: " + stepLogger.addScreenCaptureFromPath(TakeScreenshot.captureScreenshot())); | Adding screenshot to the html report
+			//stepLogger.fail("Snapshot added. Click <a href='http://github.com'>HERE</a> to view the snapshot" ); | Adding url to html reposrt
+			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder<b>*Help:</b> Search for screenshot using name as Screenshot_" + df.format(date));
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
-			//SendEmail.email();
-			//stepLogger.info("Email Sent");
-		
-			
-			//stepLogger.log(Status.FAIL, "The Test case " + result.getName() + " has Failed");
-			//stepLogger.log(Status.FAIL, "Error Message: "+ result.getThrowable());
-			//stepLogger.assignAuthor("Swagat");
 			
 		}
 		
 		else if(result.getStatus()==ITestResult.SKIP) {
-			stepLogger.skip(MarkupHelper.createLabel(result.getName() + " has been skipped", ExtentColor.YELLOW));
-			//stepLogger.log(Status.SKIP, "The Test case " + result.getName() + " has been Skipped");
 			
+			stepLogger.skip(MarkupHelper.createLabel(result.getName() + " has been skipped", ExtentColor.YELLOW));
+			//stepLogger.log(Status.SKIP, "The Test case " + result.getName() + " has been Skipped"); | Another way to add using log
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
-			//SendEmail.email();
-			//stepLogger.info("Email Sent");
+			
 		}
 		
 		stepLogger.log(Status.INFO, "Closing the Test Run");
@@ -155,10 +116,11 @@ public class Initialization extends GenericConfigClass {
 	
 	
 	@BeforeMethod
-	public void register(Method method) {
+	public void getMethodName(Method method) {
 		String testName = method.getName();
 		stepLogger=report.createTest(testName);
 	}
+	
 	
 	@AfterClass
 	public void finalizeTest() throws EmailException {

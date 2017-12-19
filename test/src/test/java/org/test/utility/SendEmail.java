@@ -18,12 +18,12 @@ public class SendEmail extends GenericConfigClass{
 		  reportAttachment.setDescription("TestReport" + df.format(date) +".html");
 		  reportAttachment.setName("TestReport" + df.format(date) +".html");
 		  
-		  // Create the screenshotAattachment
-		  EmailAttachment screenshotAttachment = new EmailAttachment();
-		  screenshotAttachment.setPath(TakeScreenshot.destination);
-		  screenshotAttachment.setDisposition(EmailAttachment.ATTACHMENT);
-		  screenshotAttachment.setDescription("Screenshot" + df.format(date) +".png");
-		  screenshotAttachment.setName("Error Screenshot" + df.format(date) +".png");
+// Create the screenshotAattachment
+		  //EmailAttachment screenshotAttachment = new EmailAttachment();
+		 // screenshotAttachment.setPath(TakeScreenshot.destination);
+		  //screenshotAttachment.setDisposition(EmailAttachment.ATTACHMENT);
+		  //screenshotAttachment.setDescription("Screenshot" + df.format(date) +".png");
+		  //screenshotAttachment.setName("Error Screenshot" + df.format(date) +".png");
 		  
 		  
 		  // Create the email message
@@ -34,20 +34,17 @@ public class SendEmail extends GenericConfigClass{
 		  email.setSSLOnConnect(true);
 		  email.setFrom(configPropertyReader.emailFrom(), "Test Report Server");
 		  email.setSubject("Test Report triggered on : " + df.format(date));
-		  email.setMsg("Test Report \n\n\n\n\n\n\n |Test Report Admin|"
+		  email.setMsg("Dear User, \n\n Please find the attached html report that was executed on Date: "+df.format(date) +" \n\n\n\n |Test Report Admin|"
 		  									+ "\n\n ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 		  									+ "\n |Disclaimer|: Do not reply to this email address directly. Your mails might not be entertained \n"
 		  										 + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		  
 		  email.addTo(configPropertyReader.emailTo(), "Swagat Sahoo");
 
 		  // add the attachment
 		  email.attach(reportAttachment);
-		  email.attach(screenshotAttachment);
+		  //email.attach(screenshotAttachment);
 		  
 		  //Send Email
-		  email.send();
-		  
 		  return email.send();
 		  
 		  

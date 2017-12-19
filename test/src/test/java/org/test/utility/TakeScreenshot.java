@@ -8,15 +8,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 
-	
 public class TakeScreenshot extends GenericConfigClass{
 	
 	static String destination;
 	
 	public static String captureScreenshot() throws IOException {
 	
-	
-			System.out.println("ScreenshotCapture in Progress");
+			System.out.println("Screenshot capture in Progress");
 			TakesScreenshot ts = (TakesScreenshot)driver;
 			File source = ts.getScreenshotAs(OutputType.FILE);
 			destination = configPropertyReader.screenshotDestination() + "\\Screenshot_" +df.format(date) +".png";
@@ -24,6 +22,5 @@ public class TakeScreenshot extends GenericConfigClass{
 		
 			return destination;
 	
-	
-}
+	}
 }
