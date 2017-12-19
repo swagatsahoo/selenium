@@ -161,7 +161,7 @@ public class Initialization extends GenericConfigClass {
 	}
 	
 	@AfterClass
-	public void afterClass() throws EmailException {
+	public void finalizeTest() throws EmailException {
 		SendEmail.email();
 	}
 	
