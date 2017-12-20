@@ -48,7 +48,6 @@ public class Initialization {
 		String testName = method.getName();
 		stepLogger=report.createTest(testName);
 	}
-	
 			
 	//Starting of Before Class
 	@BeforeClass
@@ -75,9 +74,6 @@ public class Initialization {
 		
 	}
 	
-		
-	
-
 	/*----------------------------
 	
 	
@@ -106,13 +102,9 @@ public class Initialization {
 	
 	--------------------*/
 	
-	
-
-	
-	
 	//After Test has been run
 	@AfterMethod
-	public void tearDown(ITestResult result) throws Throwable {
+	public void reportGeneration(ITestResult result) throws Throwable {
 		
 		if(result.getStatus()==ITestResult.SUCCESS) {
 			//stepLogger.log(Status.PASS, "The Test case " + result.getName()+ " has Passed"); | Another way to add using log
@@ -148,22 +140,14 @@ public class Initialization {
 		
 	}
 	
-	
-	/*@BeforeMethod
-	public void getMethodName(Method method) {
-		String testName = method.getName();
-		stepLogger=report.createTest(testName);
-	}*/
-	
 	@AfterClass
-	public void finalize() {
+	public void closureSteps() {
 		driver.quit();
 		System.out.println("Script executed and Browser Closed");
 	}
 	
-	
 	@AfterSuite
-	public void finalizeTest() throws EmailException {
+	public void emailSender() throws EmailException {
 		SendEmail.email();
 	}
 	

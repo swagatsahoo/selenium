@@ -14,7 +14,7 @@ public class VerifyLoginToApplication extends Initialization {
 	LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
 	login_page.loginNewToursDemo("demo", "demo");
 	stepLogger.info("Login Successful");
-	Assert.assertTrue(driver.getTitle().contains("Qvantel"));
+	Assert.assertTrue(driver.getTitle().contains("Mercury"));
 	stepLogger.pass("Title Verification passed");
 
 	}
