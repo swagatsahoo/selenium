@@ -5,7 +5,7 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
-public class SendEmail extends GenericConfigClass{
+public class SendEmail extends Initialization{
 	
 	public static String email() throws EmailException {
 		

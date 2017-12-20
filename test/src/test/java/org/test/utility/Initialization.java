@@ -2,30 +2,56 @@ package org.test.utility;
 
 
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.mail.EmailException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.test.pages.LoginPage;
-import org.testng.Assert;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
-public class Initialization extends GenericConfigClass {
+public class Initialization {
 	
 	//Initializing the global variable
 	
+	public static WebDriver driver;
+	
+	public static ConfigPropertyReader configPropertyReader = new ConfigPropertyReader();
+	
+	public static Date date = new Date();
+	public static DateFormat df = new SimpleDateFormat("dd.MMM.YYY, EEE 'at' h.mm.ss a z");
+	
+	static String OutputReport = configPropertyReader.destinationReportFile()+"\\TestReport_" + df.format(date) + ".html";
+	
+	static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(OutputReport);
+	static ExtentReports report = new ExtentReports();
+	public static ExtentTest stepLogger;
+	
+	static String testName;
+	
+	
+	@BeforeMethod
+	public void getMethodName(Method method) {
+		String testName = method.getName();
+		stepLogger=report.createTest(testName);
+	}
+	
 			
-	//Starting of Before Test
-	@BeforeTest
+	//Starting of Before Class
+	@BeforeClass
 	public static void setUp() {
 		
 		
@@ -44,6 +70,8 @@ public class Initialization extends GenericConfigClass {
 		report.setSystemInfo("Author", System.getProperty("user.name"));
 		report.setSystemInfo("OS", System.getProperty("os.name"));
 		report.setSystemInfo("Java Version", System.getProperty("java.version"));
+		
+		
 		
 	}
 	
@@ -79,17 +107,7 @@ public class Initialization extends GenericConfigClass {
 	--------------------*/
 	
 	
-	@Test
-	public void newDemoAUTLogin(){
-	LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
-	login_page.loginNewToursDemo("demo", "demo");
-	stepLogger.info("Login Successful");
-	Assert.assertTrue(driver.getTitle().contains("Welcome"));
-	stepLogger.pass("Title Verification passed");
-	//Initialization.tearDown(null);
-	//Initialization.finalizeTest();
-	
-}
+
 	
 	
 	//After Test has been run
@@ -110,7 +128,7 @@ public class Initialization extends GenericConfigClass {
 			TakeScreenshot.captureScreenshot();
 			//stepLogger.fail("Snapshot added: " + stepLogger.addScreenCaptureFromPath(TakeScreenshot.captureScreenshot())); | Adding screenshot to the html report
 			//stepLogger.fail("Snapshot added. Click <a href='http://github.com'>HERE</a> to view the snapshot" ); | Adding url to html reposrt
-			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder<b>@Help:</b> Search for screenshot using name as Screenshot_" + df.format(date));
+			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder____<b>Hint:</b> Search for screenshot using name as Screenshot_" + df.format(date));
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
 			
 		}
@@ -125,17 +143,22 @@ public class Initialization extends GenericConfigClass {
 		
 		stepLogger.log(Status.INFO, "Closing the Test Run");
 		report.flush();
-		driver.quit();
-		System.out.println("Script executed and Browser Closed");
+		
 		
 		
 	}
 	
 	
-	@BeforeMethod
+	/*@BeforeMethod
 	public void getMethodName(Method method) {
 		String testName = method.getName();
 		stepLogger=report.createTest(testName);
+	}*/
+	
+	@AfterClass
+	public void finalize() {
+		driver.quit();
+		System.out.println("Script executed and Browser Closed");
 	}
 	
 	

@@ -8,7 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 
-public class TakeScreenshot extends GenericConfigClass{
+public class TakeScreenshot extends Initialization{
 	
 	static String destination;
 	
