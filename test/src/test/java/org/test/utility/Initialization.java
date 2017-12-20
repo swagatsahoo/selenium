@@ -140,7 +140,7 @@ public class Initialization {
 		
 	}
 	
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void closureSteps() {
 		driver.quit();
 		System.out.println("Script executed and Browser Closed");
