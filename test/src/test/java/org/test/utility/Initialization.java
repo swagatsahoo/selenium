@@ -149,7 +149,6 @@ public class Initialization {
 	
 	@AfterSuite
 	public void emailSender() throws EmailException {
-		
 		SendEmail.email();
 	}
 	
