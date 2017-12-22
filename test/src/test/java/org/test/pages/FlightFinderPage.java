@@ -8,5 +8,7 @@ public class FlightFinderPage {
 	@FindBy(name = "tripType")
 	WebElement roundTrip;
 	
-
+	@FindBy(name = "tripType")
+	WebElement oneWay;
+	
 }

@@ -137,8 +137,6 @@ public class Initialization {
 		stepLogger.log(Status.INFO, "Closing the Test Run");
 		report.flush();
 		
-		
-		
 	}
 	
 	@AfterClass(alwaysRun = true)
