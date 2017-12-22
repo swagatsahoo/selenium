@@ -31,6 +31,8 @@ public class Initialization {
 	
 	public static ConfigPropertyReader configPropertyReader = new ConfigPropertyReader();
 	
+	public DropdownOptionSelector dropdownSelector = new DropdownOptionSelector();
+	
 	public static Date date = new Date();
 	public static DateFormat df = new SimpleDateFormat("dd.MMM.YYY, EEE 'at' h.mm.ss a z");
 	
@@ -42,8 +44,7 @@ public class Initialization {
 	
 	static String testName;
 	
-	
-	@BeforeMethod
+    @BeforeMethod
 	public void getMethodName(Method method) {
 		String testName = method.getName();
 		stepLogger=report.createTest(testName);
@@ -69,7 +70,7 @@ public class Initialization {
 		report.setSystemInfo("Author", System.getProperty("user.name"));
 		report.setSystemInfo("OS", System.getProperty("os.name"));
 		report.setSystemInfo("Java Version", System.getProperty("java.version"));
-		
+		//report.setSystemInfo("Browser", browserName + browserVersion);  | Does not work with existing chromeDriver, need to deprecate.
 		
 		
 	}
@@ -148,6 +149,7 @@ public class Initialization {
 	
 	@AfterSuite
 	public void emailSender() throws EmailException {
+		
 		SendEmail.email();
 	}
 	

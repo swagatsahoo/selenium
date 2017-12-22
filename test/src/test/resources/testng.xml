@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestSuite" thread-count="10">
-		<test name="Testing">
+		<test name="Regression Testing">
 		<classes>
-			<class name="org.test.testcases.VerifyLoginToApplication"/>
+			<class name="org.test.testcases.newtoursdemo.VerifyLoginToApplication"></class>
 		</classes>
 	</test>
 </suite>

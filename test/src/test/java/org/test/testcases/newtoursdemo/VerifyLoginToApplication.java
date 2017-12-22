@@ -1,4 +1,4 @@
-package org.test.testcases;
+package org.test.testcases.newtoursdemo;
 
 import org.openqa.selenium.support.PageFactory;
 import org.test.pages.LoginPage;
@@ -11,13 +11,12 @@ public class VerifyLoginToApplication extends Initialization {
 	
 	@Test
 	public void verifyLogin(){
+		
 	LoginPage login_page=PageFactory.initElements(driver, LoginPage.class);
 	login_page.loginNewToursDemo("demo", "demo");
 	stepLogger.info("Login Successful");
-	Assert.assertTrue(driver.getTitle().contains("Mercury"));
+	Assert.assertTrue(driver.getTitle().contains("Qvantel"));
 	stepLogger.pass("Title Verification passed");
 
 	}
-	 
-
 }
