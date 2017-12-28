@@ -12,21 +12,24 @@ public class SendEmail extends Initialization{
 			System.out.println("Send Email Process started");
 		
 		  // Create the Report attachment
+		  
 		  EmailAttachment reportAttachment = new EmailAttachment();
 		  reportAttachment.setPath(OutputReport);
 		  reportAttachment.setDisposition(EmailAttachment.ATTACHMENT);
 		  reportAttachment.setDescription("TestReport" + df.format(date) +".html");
 		  reportAttachment.setName("TestReport" + df.format(date) +".html");
 		  
-// Create the screenshotAattachment
-		  //EmailAttachment screenshotAttachment = new EmailAttachment();
-		 // screenshotAttachment.setPath(TakeScreenshot.destination);
-		  //screenshotAttachment.setDisposition(EmailAttachment.ATTACHMENT);
-		  //screenshotAttachment.setDescription("Screenshot" + df.format(date) +".png");
-		  //screenshotAttachment.setName("Error Screenshot" + df.format(date) +".png");
+		  // Create the screenshotAattachment
+		  
+		  /*EmailAttachment screenshotAttachment = new EmailAttachment();
+		  screenshotAttachment.setPath(TakeScreenshot.destination);
+		  screenshotAttachment.setDisposition(EmailAttachment.ATTACHMENT);
+		  screenshotAttachment.setDescription("Screenshot" + df.format(date) +".png");
+		  screenshotAttachment.setName("Error Screenshot" + df.format(date) +".png");*/
 		  
 		  
 		  // Create the email message
+		  
 		  MultiPartEmail email = new MultiPartEmail();
 		  email.setHostName(configPropertyReader.hostName());
 		  email.setSslSmtpPort(configPropertyReader.hostSMTPport());
@@ -42,7 +45,7 @@ public class SendEmail extends Initialization{
 
 		  // add the attachment
 		  email.attach(reportAttachment);
-		  //email.attach(screenshotAttachment);
+		  //email.attach(screenshotAttachment); | Attachment of screenshot 
 		  
 		  //Send Email
 		  return email.send();

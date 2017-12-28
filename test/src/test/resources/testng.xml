@@ -2,7 +2,7 @@
 <suite name="TestSuite" thread-count="10">
 		<test name="Regression Testing">
 		<classes>
-			<class name="org.test.testcases.newtoursdemo.VerifyLoginToApplication"></class>
+			<class name="org.test.testcases.newtoursdemo.RegisterToPortal"></class>
 		</classes>
 	</test>
 </suite>

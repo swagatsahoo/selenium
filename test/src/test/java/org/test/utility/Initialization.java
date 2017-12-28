@@ -9,6 +9,7 @@ import java.util.Date;
 import org.apache.commons.mail.EmailException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -43,6 +44,8 @@ public class Initialization {
 	public static ExtentTest stepLogger;
 	
 	static String testName;
+	
+	
 	
     @BeforeMethod
 	public void getMethodName(Method method) {
@@ -103,7 +106,8 @@ public class Initialization {
 	
 	--------------------*/
 	
-	//After Test has been run
+	//After each test method has been run
+	
 	@AfterMethod
 	public void reportGeneration(ITestResult result) throws Throwable {
 		
@@ -121,7 +125,7 @@ public class Initialization {
 			TakeScreenshot.captureScreenshot();
 			//stepLogger.fail("Snapshot added: " + stepLogger.addScreenCaptureFromPath(TakeScreenshot.captureScreenshot())); | Adding screenshot to the html report
 			//stepLogger.fail("Snapshot added. Click <a href='http://github.com'>HERE</a> to view the snapshot" ); | Adding url to html reposrt
-			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder____<b>Hint:</b> Search for screenshot using name as Screenshot_" + df.format(date));
+			stepLogger.fail("Error Snapshot added. Click <a href='C://Screenshots/'><b>HERE</b></a> to open parent folder<b>::::Hint-</b> Search for screenshot using name as Screenshot_" + df.format(date));
 			stepLogger.info(MarkupHelper.createLabel("Email Sent", ExtentColor.TEAL));
 			
 		}
