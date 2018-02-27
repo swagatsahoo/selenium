@@ -2,6 +2,8 @@ package org.test.utility;
 
 
 import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,7 +44,7 @@ public class Initialization {
 	static ExtentReports report = new ExtentReports();
 	public static ExtentTest stepLogger;
 	
-	static String testName;
+	static String testName, systemIp;
 	
 	
 	
@@ -65,6 +67,14 @@ public class Initialization {
 		htmlReporter.loadXMLConfig("src/test/resources/extentReportConfig.xml");
 		report.attachReporter(htmlReporter);
 		
+		
+		//==========================================================================
+		try {
+            InetAddress ipAddr = InetAddress.getLocalHost();
+            systemIp= ipAddr.getHostAddress();
+        } catch (UnknownHostException ex) {
+            ex.printStackTrace();
+        }
 		//==========================================================================
 		
 		report.setSystemInfo("Environment", "RUBIK SIT");
@@ -72,6 +82,7 @@ public class Initialization {
 		report.setSystemInfo("Author", System.getProperty("user.name"));
 		report.setSystemInfo("OS", System.getProperty("os.name"));
 		report.setSystemInfo("Java Version", System.getProperty("java.version"));
+		report.setSystemInfo("System IP", systemIp + "IPv4");
 		//report.setSystemInfo("Browser", browserName + browserVersion);  | Does not work with existing chromeDriver, need to deprecate.
 		
 		

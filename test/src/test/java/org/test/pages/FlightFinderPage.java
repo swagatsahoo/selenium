@@ -5,10 +5,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class FlightFinderPage {
 	
-	@FindBy(name = "tripType")
+	@FindBy(xpath = "//input[@value='roundtrip']")
 	WebElement roundTrip;
 	
-	@FindBy(name = "tripType")
+	@FindBy(xpath = "//input[@value='oneway']")
 	WebElement oneWay;
+	
+	@FindBy(xpath = "//select[@name='passCount']")
+	WebElement passengers;
+	
 	
 }
