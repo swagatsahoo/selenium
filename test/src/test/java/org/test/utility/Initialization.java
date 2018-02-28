@@ -82,7 +82,7 @@ public class Initialization {
 		report.setSystemInfo("Author", System.getProperty("user.name"));
 		report.setSystemInfo("OS", System.getProperty("os.name"));
 		report.setSystemInfo("Java Version", System.getProperty("java.version"));
-		report.setSystemInfo("System IP", systemIp + "IPv4");
+		report.setSystemInfo("System IP", systemIp + "  (IPv4)");
 		//report.setSystemInfo("Browser", browserName + browserVersion);  | Does not work with existing chromeDriver, need to deprecate.
 		
 		
