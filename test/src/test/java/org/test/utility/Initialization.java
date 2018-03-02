@@ -59,6 +59,7 @@ public class Initialization {
 	public static void setUp() {
 		
 		
+		//Initializing WebDriver==========================================
 		System.out.println("Initializing the Browser for testing");
 		System.setProperty("webdriver.chrome.driver", configPropertyReader.chromePath());
 		driver = new ChromeDriver();
@@ -68,15 +69,15 @@ public class Initialization {
 		report.attachReporter(htmlReporter);
 		
 		
-		//==========================================================================
+		//Getting Ip adddress======================================================
 		try {
             InetAddress ipAddr = InetAddress.getLocalHost();
             systemIp= ipAddr.getHostAddress();
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         }
-		//==========================================================================
 		
+		//Setting Report dashboard section=================================================
 		report.setSystemInfo("Environment", "RUBIK SIT");
 		report.setSystemInfo("Execution Date", df.format(date));
 		report.setSystemInfo("Author", System.getProperty("user.name"));
@@ -116,8 +117,9 @@ public class Initialization {
 	
 	--------------------*/
 	
-	//After each test method has been run
 	
+	
+	//After each test method has been run
 	@AfterMethod
 	public void reportGeneration(ITestResult result) throws Throwable {
 		
