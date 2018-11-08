@@ -7,9 +7,10 @@ import org.apache.commons.mail.MultiPartEmail;
 
 public class SendEmail extends Initialization{
 	
-	public static String email() throws EmailException {
+	public static void email() throws EmailException {
 		
-			System.out.println("Send Email Process started");
+		//String email() throws EmailException {
+			System.out.println("Send Email Process ---> Started");
 		
 		  // Create the Report attachment
 		  
@@ -48,8 +49,8 @@ public class SendEmail extends Initialization{
 		  //email.attach(screenshotAttachment); | Attachment of screenshot 
 		  
 		  //Send Email
-		  return email.send();
-		  
+		  email.send();
+		  System.out.println("Send Email Process ---> Completed");
 		  
 		
 	}
