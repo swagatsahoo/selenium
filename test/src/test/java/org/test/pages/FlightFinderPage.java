@@ -14,5 +14,8 @@ public class FlightFinderPage {
 	@FindBy(xpath = "//select[@name='passCount']")
 	WebElement passengers;
 	
+
+	@FindBy(xpath = "//select[@name='passCount']")
+	WebElement passengers1;
 	
 }
