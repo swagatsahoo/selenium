@@ -3,7 +3,8 @@ package org.test.testcases.newtoursdemo;
 import org.openqa.selenium.support.PageFactory;
 import org.test.pages.RegisterUserPage;
 import org.test.utility.Initialization;
-import org.testng.annotations.Test;
+//import org.testng.*;
+import org.testng.annotations.*;
 
 import com.aventstack.extentreports.Status;
 
